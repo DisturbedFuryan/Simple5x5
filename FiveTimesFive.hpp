@@ -11,9 +11,15 @@ public:
 private:
     void getValues();
     
+    void makeSchedule() const;
+    
+    float normalizeWeight(const float weight) const;
+    
     float m_oneRepMax;
     float m_progressFromWeekToWeek;
     float m_weightAccuracy;
+    
+    float m_treshold;
 };
 //==================================================================================================
 
