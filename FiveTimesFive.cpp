@@ -4,8 +4,7 @@
 
 using namespace std;
 
-CFiveTimesFive::CFiveTimesFive() : m_oneRepMax(0.0f), m_progressFromWeekToWeek(0.0f),
-                                   m_weightAccuracy(0.0f), m_treshold(0.0f) {}
+CFiveTimesFive::CFiveTimesFive() : m_oneRepMax(0.0f), m_progressFromWeekToWeek(0.0f) {}
                                    
 void CFiveTimesFive::start() {
     getValues();
@@ -16,14 +15,11 @@ void CFiveTimesFive::start() {
 void CFiveTimesFive::getValues() {
     cout << "Type one rep max: ";
     cin >> m_oneRepMax;
+    m_oneRepMax = normalizeWeight(m_oneRepMax);
     
     cout << "Type progress weight from week to week: ";
     cin >> m_progressFromWeekToWeek;
-    
-    cout << "Type accuracy of result weights: ";
-    cin >> m_weightAccuracy;
-    
-    m_treshold = ((2.0f / 3.0f) * m_weightAccuracy);
+    m_progressFromWeekToWeek = normalizeWeight(m_progressFromWeekToWeek);
 }
 
 void CFiveTimesFive::makeSchedule() const {
@@ -50,7 +46,7 @@ void CFiveTimesFive::makeSchedule() const {
 }
 
 float CFiveTimesFive::normalizeWeight(const float weight) const {
-    float floorWeight = (m_weightAccuracy * static_cast<int>(weight / m_weightAccuracy));
+    float floorWeight = (g_weightAccuracy * static_cast<int>(weight / g_weightAccuracy));
     float end = (weight - floorWeight);
-    return ((end > m_treshold) ? (floorWeight + m_weightAccuracy) : floorWeight);
+    return ((end > g_treshold) ? (floorWeight + g_weightAccuracy) : floorWeight);
 }

@@ -17,9 +17,6 @@ private:
     
     float m_oneRepMax;
     float m_progressFromWeekToWeek;
-    float m_weightAccuracy;
-    
-    float m_treshold;
 };
 //==================================================================================================
 
